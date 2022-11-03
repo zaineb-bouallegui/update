@@ -1,0 +1,37 @@
+<h1>Add a new Product</h1>
+<form #f="ngForm">
+  <div class="form-group col-md-6">
+    <label>Title</label>
+    <input type="text" [(ngModel)]="product.title" name="title"
+    class="form-control" required minlength="3" pattern="[a-zA-A]{3,12}$" #t="ngModel">
+    <div class="alert alert-danger" *ngIf="f.invalid ">
+      <div *ngIf="t.hasError('required')">this field is required </div>
+      <div *ngIf="t.hasError('minlength')">minlength="3"</div>
+       <div *ngIf="t.hasError">Error pattern</div>
+       minlength=3!
+     </div>
+    </div>
+
+  <div class="form-group col-md-6">
+    <label>price</label>
+    <input type="number" #p="ngModel" [(ngModel)]="product.price"name="price" class="form-control" required>
+    <div *ngIf="p.invalid && p.touched" class=""alert alert-danger>this field is required </div>
+  </div>
+
+  <div class="form-group col-md-6">
+    <label>quantity</label>
+    <input type="number" [(ngModel)]="product.quantity" name="quantity" required class="form-control">
+  </div>
+  <div class="form-group col-md-6">
+    <label>Picture</label>
+    <input type="text" [(ngModel)]="product.picture" name="picture" class="form-control" required>
+  </div>
+  <br>
+  <button class="btn btn-success" (click)="saveProduct()"
+  [disabled]="f.invalid">
+    save
+  </button>
+  <button type="reset" class="btn btn-warning">
+    reset
+  </button>
+</form>
